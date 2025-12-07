@@ -2,7 +2,9 @@ import fs from "fs/promises";
 import path from "path";
 import { nanoid } from "nanoid";
 
-const contactsPath = path.resolve("src", "db", "contacts.json");
+const contactsPath = process.env.CONTACTS_PATH
+    ? path.resolve(process.env.CONTACTS_PATH)
+    : path.resolve("src", "db", "contacts.json");
 
 async function readContacts() {
     const data = await fs.readFile(contactsPath, "utf-8");
